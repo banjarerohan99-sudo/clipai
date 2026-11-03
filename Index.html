@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClipAI - Video Editor</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#10111b;
+ color:white;
+ font-family:Arial,sans-serif;
+ padding:20px;
+}
+header{
+ font-size:27px;
+ font-weight:bold;
+ color:#a78bfa;
+ margin-bottom:25px;
+}
+.card{
+ background:#1c1d2b;
+ padding:18px;
+ border-radius:15px;
+ margin-bottom:18px;
+}
+h2{font-size:19px}
+input,textarea,button{
+ width:100%;
+ padding:13px;
+ margin:8px 0;
+ border-radius:9px;
+ border:1px solid #444;
+ background:#292a3b;
+ color:white;
+ font-size:15px;
+}
+button{
+ background:#7955ed;
+ border:0;
+ font-weight:bold;
+}
+video{
+ width:100%;
+ border-radius:10px;
+ margin-top:12px;
+}
+.small{color:#aaa;font-size:13px}
+</style>
+</head>
+<body>
+
+<header>✂ ClipAI</header>
+<p class="small">Your Video. Your Clips. Powered by AI.</p>
+
+<div class="card">
+<h2>📁 Upload Video</h2>
+<input type="file" id="file" accept="video/*">
+<video id="preview" controls hidden></video>
+</div>
+
+<div class="card">
+<h2>✂ Select Your Clip</h2>
+<label>Start Time (Seconds)</label>
+<input type="number" id="start" value="0" min="0">
+<label>End Time (Seconds)</label>
+<input type="number" id="end" value="30" min="1">
+</div>
+
+<div class="card">
+<h2>✨ AI Title Generator</h2>
+<input id="topic" placeholder="Video ka topic likho">
+<button onclick="generate()">Generate Title & Caption</button>
+<h3>Title</h3>
+<textarea id="title" placeholder="Your title..."></textarea>
+<h3>Caption</h3>
+<textarea id="caption" placeholder="Your caption..."></textarea>
+<h3>Hashtags</h3>
+<textarea id="tags" placeholder="#Shorts #Reels"></textarea>
+</div>
+
+<script>
+const file=document.getElementById("file");
+const video=document.getElementById("preview");
+
+file.onchange=()=>{
+ if(file.files[0]){
+ video.src=URL.createObjectURL(file.files[0]);
+ video.hidden=false;
+ }
+};
+
+function generate(){
+ let topic=document.getElementById("topic").value.trim();
+ if(!topic){
+ alert("Pehle video ka topic likho!");
+ return;
+ }
+ document.getElementById("title").value=
+ "🔥 "+topic+" | Must Watch!";
+ document.getElementById("caption").value=
+ "Dekhiye "+topic+" ka interesting video! Pasand aaye to share karein.";
+ document.getElementById("tags").value=
+ "#Shorts #Reels #"+topic.replace(/\s+/g,"");
+}
+</script>
+
+</body>
+                                                   </html>
